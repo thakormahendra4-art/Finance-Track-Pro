@@ -1,0 +1,1560 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinTrack Pro</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --bg: #f8f9fb;
+        --surface: #ffffff;
+        --border-color: rgba(0, 0, 0, 0.192);
+        --text: #111;
+        --text-muted: gray;
+        --input-bg: rgb(248, 249, 251);
+      }
+
+      body.dark {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --text: #e8eaf0;
+        --text-muted: #9ca3af;
+        --input-bg: #22263a;
+      }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          "Open Sans",
+          "Helvetica Neue",
+          sans-serif;
+
+        overflow-x: hidden;
+      }
+      main {
+        height: 100%;
+        width: 100%;
+      }
+
+      /* login page*/
+      #logInPage {
+        height: 100%;
+        width: 100%;
+        background-color: rgb(244, 247, 246);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .logInContainer {
+        padding-top: 2.5rem;
+        width: 27vw;
+        height: 400px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border-radius: 10px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.219);
+      }
+
+      .logInHead {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logInHead h4 {
+        color: rgb(0, 0, 0);
+        font-weight: 400;
+      }
+
+      .logInInput {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 2rem;
+      }
+      .userInput {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .userInput input {
+        padding: 0.6rem;
+        border: none;
+        border: 1px solid rgba(0, 0, 0, 0.249);
+        border-radius: 6px;
+      }
+
+      .userInput h4 {
+        font-weight: 400;
+        font-size: 1rem;
+      }
+
+      .logInContainer button {
+        padding: 0.6rem;
+        border: none;
+        border-radius: 6px;
+        background-color: rgb(0, 86, 179);
+        color: white;
+        font-weight: 700;
+      }
+      .logInBottom {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 1px;
+        font-size: 0.9rem;
+      }
+
+      .logInBottom a {
+        color: rgb(0, 86, 179);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      /* Register page*/
+
+      #regPage {
+        height: 100%;
+        width: 100%;
+        background-color: rgb(244, 247, 246);
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .regContainer {
+        padding-top: 2.5rem;
+        width: 27vw;
+        height: 400px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border-radius: 10px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.219);
+      }
+
+      .regHead {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .regHead h4 {
+        color: rgb(0, 0, 0);
+        font-weight: 400;
+      }
+
+      .regInput {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 2rem;
+      }
+      .userInput {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .userInput input {
+        padding: 0.6rem;
+        border: none;
+        border: 1px solid rgba(0, 0, 0, 0.249);
+        border-radius: 6px;
+      }
+
+      .userInput h4 {
+        font-weight: 400;
+        font-size: 1rem;
+      }
+
+      .regContainer button {
+        padding: 0.6rem;
+        border: none;
+        border-radius: 6px;
+        background-color: rgb(40, 167, 69);
+        color: white;
+        font-weight: 700;
+      }
+      .regBottom {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        font-size: 0.9rem;
+      }
+
+      .regBottom a {
+        color: rgb(0, 86, 179);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      /* Main container */
+
+      #mainContainer {
+        height: 100%;
+        width: 100%;
+        display: none;
+      }
+
+      #left-container {
+        height: 100%;
+        width: 18%;
+        padding: 1.5rem 1.5rem 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: var(--surface);
+        border-right: 1px solid var(--border-color);
+      }
+
+      body.dark #left-container {
+        background-color: #1f2937;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        color: #f8f9fb;
+      }
+
+      body.dark .dashboard:hover {
+        background-color: rgb(55, 65, 81);
+      }
+      body.dark .setting:hover {
+        background-color: rgb(55, 65, 81);
+      }
+
+      .left-top {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .left-top .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .left-top .logo div {
+        display: flex;
+        flex-direction: column;
+      }
+      .left-top .logo div h2 {
+        font-size: 1.2rem;
+      }
+      .left-top .logo div p {
+        font-size: 0.8rem;
+      }
+
+      .logo2 {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .dashboard {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.8rem;
+        border-radius: 10px;
+      }
+
+      .dashboard:hover {
+        color: rgb(30, 64, 175);
+        background-color: rgb(219, 234, 254);
+      }
+
+      .dashboard h4 {
+        font-size: 1rem;
+      }
+
+      #right-container {
+        height: 100%;
+        width: 82%;
+        background-color: darkmagenta;
+      }
+      .setting {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.8rem 0.8rem 0.8rem 0.6rem;
+        border-radius: 10px;
+      }
+
+      .setting:hover {
+        color: rgb(30, 64, 175);
+        background-color: rgb(219, 234, 254);
+      }
+      .setting h4 {
+        font-size: 1rem;
+      }
+
+      #left-btn {
+        padding-bottom: 1.5rem;
+      }
+
+      #left-btn button {
+        color: white;
+        background-color: black;
+        padding: 0.8rem 2.5rem;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 10px;
+        border: none;
+      }
+
+      body.dark #left-btn button {
+        background-color: rgb(59, 130, 246);
+        border: none;
+      }
+
+      #right-container {
+        min-height: 100%;
+        width: 82%;
+        background-color: rgb(248, 249, 251);
+        overflow-x: hidden;
+        overflow-y: auto;
+        box-sizing: border-box;
+      }
+
+      /*Add transaction*/
+
+      #add-transaction {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid var(--border-color);
+      }
+
+      .add-container {
+        height: 65vh;
+        width: 26vw;
+        padding: 1.3rem;
+        border-radius: 10px;
+        background-color: var(--surface);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .add-container .close {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .add-container .close i {
+        color: rgba(0, 0, 0, 0.351);
+      }
+
+      .data {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .type {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .type select {
+        padding: 0.5rem;
+        border: none;
+        background-color: rgb(248, 249, 251);
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.107);
+      }
+      .type input {
+        padding: 0.5rem;
+        border: none;
+        background-color: rgb(248, 249, 251);
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.103);
+      }
+
+      .A-D {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .category {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .add-container button {
+        padding: 0.6rem;
+        border: none;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.103);
+        font-weight: 700;
+      }
+
+      /*navbar*/
+
+      body.dark nav {
+        color: #f8f9fb;
+        background-color: #1f2937 !important;
+      }
+      body.dark nav button {
+        color: #f8f9fb;
+        border: none;
+        border: 2px solid rgba(255, 255, 255, 0.255);
+      }
+
+      nav {
+        background-color: var(--surface);
+        padding: 1rem 3rem 1rem 0;
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: end;
+        border-right: 1px solid var(--border-color);
+      }
+
+      body.dark nav {
+        background-color: #13151f;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      nav button {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        display: flex;
+        gap: 0.5rem;
+        border: none;
+        border: 1px solid rgba(0, 0, 0, 0.297);
+        background-color: transparent;
+        font-weight: 600;
+      }
+      nav span {
+        font-weight: 500;
+      }
+
+      /*Dashboard page*/
+
+      /* All white cards */
+
+      body.dark #main {
+        background-color: rgb(17, 24, 39);
+        color: #f8f9fb;
+      }
+      body.dark .main-part-2 .main-cards .card-1,
+      body.dark .analysis,
+      body.dark .transaction,
+      body.dark .add-container,
+      body.dark .add-container i,
+      body.dark .main-part-3 .part-2 .card-1 {
+        background-color: #1f2937;
+        border-color: rgba(255, 255, 255, 0.08);
+        color: #e8eaf0;
+      }
+
+      body.dark .main-part-3 .part-2 .card-1 button {
+        background-color: #e8eaf0;
+      }
+
+      #main {
+        min-height: 80vh;
+        padding: 2.2rem 1.5rem 0 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .main-part-1 h2 {
+        font-size: 1.9rem;
+      }
+      .main-part-1 p {
+        font-size: 1rem;
+        color: gray;
+      }
+
+      .main-part-2 {
+        height: 21vh;
+      }
+      .main-part-2 .main-cards {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .main-part-2 .main-cards .card-1 {
+        background-color: white;
+        height: 21vh;
+        width: 20vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+        padding: 0 0 0 1.3rem;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.118);
+      }
+
+      .card-1 i {
+        width: fit-content;
+        padding: 10px;
+        background-color: rgba(30, 64, 175, 0.201);
+        color: rgb(30, 64, 175);
+        border-radius: 5px;
+      }
+      .card-1 h1 {
+        font-size: 1.5rem;
+      }
+      .card-1 p {
+        font-size: 1rem;
+        color: grey;
+      }
+
+      .income i {
+        background-color: rgba(20, 193, 81, 0.179);
+        color: green;
+      }
+      .income h1 {
+        color: green;
+      }
+      .expense i {
+        background-color: rgba(255, 0, 0, 0.13);
+        color: darkred;
+      }
+      .expense h1 {
+        color: darkred;
+      }
+
+      .main-part-3 {
+        min-height: 80vh;
+        height: auto;
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+
+      .main-part-3 .part-1 {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .analysis {
+        background: white;
+        height: 48vh;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .analysis canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .transaction {
+        background-color: white;
+        min-height: 27vh;
+        height: auto;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.2rem 1rem 0 1.2rem;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .buttons .inp {
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: rgb(248, 249, 251);
+      }
+
+      .buttons .inp input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+      }
+
+      .buttons .inp i {
+        font-size: 1.2rem;
+      }
+
+      .buttons .container select {
+        width: 35vw;
+        padding: 9px 2px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        background-color: rgb(248, 249, 251);
+      }
+
+      .transaction-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .transaction-table th,
+      .transaction-table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .transaction-table button {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 2px;
+      }
+
+      .editBtn {
+        background: #2563eb;
+        color: white;
+      }
+
+      .deleteBtn {
+        background: #dc2626;
+        color: white;
+      }
+
+      .main-part-3 .part-2 {
+        height: 100%;
+        width: 40%;
+      }
+
+      .main-part-3 .part-2 .card-1 {
+        height: 30vh;
+        background-color: white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 1rem 1rem 1rem;
+      }
+
+      .darkMode {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .darkMode .cover {
+        background-color: white;
+        height: 25px;
+        width: 50px;
+        border: 1px solid black;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        padding: 0 0.2rem;
+        cursor: pointer;
+      }
+
+      .darkMode .cover .circle {
+        background-color: white;
+        height: 15px;
+        width: 15px;
+        border: 1px solid black;
+        border-radius: 20px;
+        transition-duration: 0.5s;
+      }
+
+      .darkMode .cover .circle:hover {
+        background-color: black;
+        height: 15px;
+        width: 15px;
+        border: 1px solid white;
+        border-radius: 20px;
+      }
+
+      .line-darkMode {
+        height: 0;
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.201);
+      }
+      .main-part-3 .part-2 .card-1 button {
+        background-color: rgba(255, 0, 0, 0.14);
+        color: brown;
+        border: none;
+        border: 1px solid rgba(255, 0, 0, 0.281);
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 8px;
+      }
+
+      #reset {
+        padding: 0%;
+        background-color: transparent;
+        color: brown;
+      }
+
+      /* setting page*/
+
+      body.dark .setting-card {
+        background-color: #1f2937;
+        border-color: rgba(255, 255, 255, 0.08);
+        color: #e8eaf0;
+      }
+      body.dark #settings {
+        background-color: rgb(17, 24, 39);
+        border-color: rgba(255, 255, 255, 0.08);
+        color: #e8eaf0;
+      }
+
+      #settings {
+        padding: 2rem 0 0 2rem;
+        height: 88vh;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .setting-card {
+        background-color: white;
+        width: 55vw;
+        height: 33vh;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 1rem 1rem 1rem;
+        justify-content: space-between;
+        border-radius: 10px;
+      }
+
+      .settingMIddle {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+
+      .settingMIddle .settingInp {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .settingInp div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 50%;
+      }
+
+      .settingInp div input {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(248, 249, 251);
+      }
+      .settingInp div select {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(248, 249, 251);
+      }
+
+      .setting-card button {
+        width: fit-content;
+        padding: 0.5rem 1rem;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div id="logInPage">
+        <div class="logInContainer">
+          <div class="logInHead">
+            <h2>Welcome Back</h2>
+            <h4>Login to FinTrack Pro</h4>
+          </div>
+          <div class="logInInput">
+            <div class="userInput">
+              <h4>Username</h4>
+              <input type="text" name="" id="" />
+            </div>
+
+            <div class="userInput">
+              <h4>Password</h4>
+              <input type="password" name="" id="" />
+            </div>
+            <button id="loginBtn">Login</button>
+          </div>
+
+          <div class="logInBottom">
+            <p>Don't have an account?</p>
+            <a id="register" href="">Register here</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="regPage">
+        <div class="regContainer">
+          <div class="regHead">
+            <h2>Create Account</h2>
+            <h4>Join FinTrack Pro</h4>
+          </div>
+          <div class="regInput">
+            <div class="userInput">
+              <h4>Choose a Username</h4>
+              <input type="text" name="" id="" />
+            </div>
+
+            <div class="userInput">
+              <h4>Password</h4>
+              <input type="password" name="" id="" />
+            </div>
+            <button id="registeBtn">Register</button>
+          </div>
+
+          <div class="regBottom">
+            <p>Already have an account?</p>
+            <a id="logIn" href="">Login here</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="mainContainer">
+        <div id="left-container">
+          <div class="left-top">
+            <div class="logo">
+              <i style="font-size: 1.8rem" class="ri-stack-fill"></i>
+              <div>
+                <h2>FinTrack Pro</h2>
+                <p>Enterprise Finance</p>
+              </div>
+            </div>
+
+            <div class="logo2">
+              <div class="dashboard">
+                <i style="font-size: 1rem" class="fa-solid fa-border-all"></i>
+                <h4>Dashboard</h4>
+              </div>
+
+              <div class="setting">
+                <i style="font-size: 1.2rem" class="ri-settings-5-fill"></i>
+                <h4>Setting</h4>
+              </div>
+            </div>
+          </div>
+
+          <div id="left-btn">
+            <button id="addTransaction">
+              <i style="font-size: 1rem" class="ri-add-line"></i> Add
+              Transaction
+            </button>
+          </div>
+        </div>
+        <div id="right-container">
+          <nav>
+            <span id="userName">User</span>
+            <button id="logoutBtn">
+              <i class="ri-logout-box-r-line"></i>Logout
+            </button>
+          </nav>
+
+          <div id="main">
+            <div class="main-part-1">
+              <h2>Financial Overview</h2>
+              <p>Real-time tracking application</p>
+            </div>
+            <div class="main-part-2">
+              <div class="main-cards">
+                <div class="card-1">
+                  <i class="fa-solid fa-building-columns"></i>
+                  <div>
+                    <p>Current Balance</p>
+                    <h1 id="currentBalance">$0.00</h1>
+                  </div>
+                </div>
+                <div class="card-1 income">
+                  <i class="fa-solid fa-arrow-trend-up"></i>
+                  <div>
+                    <p>Total Income</p>
+                    <h1 id="totalIncome">$0.00</h1>
+                  </div>
+                </div>
+                <div class="card-1 expense">
+                  <i class="fa-solid fa-arrow-trend-down"></i>
+                  <div>
+                    <p id="totalExpense">Total Expense</p>
+                    <h1>$0.00</h1>
+                  </div>
+                </div>
+                <div class="card-1">
+                  <i class="fa-solid fa-piggy-bank"></i>
+                  <div>
+                    <p id="totalTransactions">Total Transactions</p>
+                    <h1>0</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="main-part-3">
+              <div class="part-1">
+                <div class="analysis">
+                  <h2 style="padding: 20px 20px 0">Cash Flow Analysis</h2>
+                  <div style="height: 300px; padding: 20px">
+                    <canvas id="cashFlowChart"></canvas>
+                  </div>
+                </div>
+
+                <div class="transaction">
+                  <h2>All Transactions</h2>
+
+                  <div class="buttons">
+                    <div class="inp">
+                      <i class="fa-brands fa-sistrix"></i>
+                      <input type="text" placeholder="Search Transaction..." />
+                    </div>
+
+                    <div class="container">
+                      <select id="category">
+                        <option value="">All Types</option>
+                        <option value="food">Income Only</option>
+                        <option value="travel">Expencel Only</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <table class="transaction-table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+
+                    <tbody id="transactionBody"></tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="part-2">
+                <div class="card-1">
+                  <h2>Preferences</h2>
+
+                  <div class="darkMode">
+                    <h3>Dark Mode</h3>
+
+                    <div class="cover">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+
+                  <div class="line-darkMode"></div>
+
+                  <button id="resetBtn">
+                    <i id="reset" class="fa-solid fa-trash"></i> Reset All Data
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="settings">
+            <div class="setting-head">
+              <h1>Settings</h1>
+              <p>Manage your account profile and app formatting.</p>
+            </div>
+            <div class="setting-card">
+              <div class="settingMIddle">
+                <h2>Profile Details</h2>
+
+                <div class="settingInp">
+                  <div>
+                    <p>Full Name</p>
+                    <input id="userNameInput" type="text" placeholder="user" />
+                  </div>
+
+                  <div>
+                    <p>Primary Currency</p>
+                    <select name="" id="currency">
+                      <option value="₹">INR (₹)</option>
+                      <option value="$">USD ($)</option>
+                      <option value="€">EUR (€)</option>
+                      <option value="¥">JPY (¥)</option>
+                      <option value="£">GBP (£)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <button id="saveSettings">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="add-transaction">
+        <form class="add-container">
+          <div class="close">
+            <h2>Add Transaction</h2>
+            <i id="close" style="font-size: 1.4rem" class="ri-close-line"></i>
+          </div>
+
+          <div class="data">
+            <div class="type">
+              <p>Type</p>
+              <select required>
+                <option value="Expense">Expense</option>
+                <option value="Income">Income</option>
+              </select>
+            </div>
+
+            <div class="type">
+              <p>Description</p>
+              <input type="text" placeholder="e.g Amazon,Salary,Coffee" />
+            </div>
+
+            <div class="A-D">
+              <div class="type">
+                <p>Amount</p>
+                <input required type="number" />
+              </div>
+              <div class="type">
+                <p>Date</p>
+                <input type="date" />
+              </div>
+            </div>
+          </div>
+
+          <div class="category type">
+            <p>Category</p>
+            <select required>
+              <optgroup label="Select a Category">
+                <option value="">Food & Dining</option>
+                <option value="">Shoping</option>
+                <option value="">Reacharge & Bills</option>
+                <option value="">Petrol & Auto</option>
+                <option value="">Utility</option>
+                <option value="">Salary</option>
+                <option value="">Entertainment</option>
+                <option value="">Others</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <button>Save Transaction</button>
+        </form>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const regBtn = document.querySelector("#register");
+      const logInBtn = document.querySelector("#logIn");
+      const logInPage = document.querySelector("#logInPage");
+      const regPage = document.querySelector("#regPage");
+      const addTransactionBtn = document.querySelector("#addTransaction");
+      const formTransaction = document.querySelector("#add-transaction");
+      const form = document.querySelector("form");
+      const close = document.querySelector("#close");
+      const dashboard = document.querySelector(".dashboard");
+      const setting = document.querySelector(".setting");
+      const dashboardPage = document.querySelector("#main");
+      const settingsPage = document.querySelector("#settings");
+      const userName = document.getElementById("userName");
+      const userNameInput = document.getElementById("userNameInput");
+      const currency = document.getElementById("currency");
+      const saveSettings = document.getElementById("saveSettings");
+      const resetBtn = document.querySelector("#resetBtn");
+      const mainContainer = document.getElementById("mainContainer");
+      const logoutBtn = document.querySelector("#logoutBtn");
+      const loginBtn = document.querySelector("#loginBtn");
+      const registeBtn = document.querySelector("#registeBtn");
+
+      console.log(loginBtn);
+
+      // function for a save a data on local storage
+      function saveData() {
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+
+        localStorage.setItem("username", userName.textContent);
+
+        localStorage.setItem("currency", currencySymbol);
+      }
+
+      function loadData() {
+        const savedTransactions = localStorage.getItem("transactions");
+
+        if (savedTransactions) {
+          transactions = JSON.parse(savedTransactions);
+        }
+
+        const loggedInUser = localStorage.getItem("loggedInUser");
+
+        if (loggedInUser) {
+          userName.textContent = loggedInUser;
+          userNameInput.value = loggedInUser;
+        }
+
+        const savedCurrency = localStorage.getItem("currency");
+
+        if (savedCurrency) {
+          currencySymbol = savedCurrency;
+          currency.value = savedCurrency;
+        }
+
+        renderTransactions();
+        updateDashboard();
+        updateChart();
+      }
+
+      regBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        regPage.style.display = "flex";
+        logInPage.style.display = "none";
+      });
+
+      document
+        .querySelector(".regContainer button")
+        .addEventListener("click", () => {
+          const username = document
+            .querySelector(".regInput .userInput:nth-child(1) input")
+            .value.trim();
+          const password = document
+            .querySelector(".regInput .userInput:nth-child(2) input")
+            .value.trim();
+
+          if (!username || !password) {
+            alert("Please fill all fields");
+            return;
+          }
+          if (localStorage.getItem("user_" + username)) {
+            alert("Username already exists");
+            return;
+          }
+
+          localStorage.setItem("user_" + username, password);
+          alert("Account created! Please login.");
+          regPage.style.display = "none";
+          logInPage.style.display = "flex";
+        });
+
+      document
+        .querySelector(".logInContainer button")
+        .addEventListener("click", () => {
+          const username = document
+            .querySelector(".logInInput .userInput:nth-child(1) input")
+            .value.trim();
+          const password = document
+            .querySelector(".logInInput .userInput:nth-child(2) input")
+            .value.trim();
+
+          if (!username || !password) {
+            alert("Please fill all fields");
+            return;
+          }
+
+          const saved = localStorage.getItem("user_" + username);
+
+          if (!saved || saved !== password) {
+            alert("Invalid username or password");
+            return;
+          }
+
+          // Login success
+          localStorage.setItem("loggedInUser", username);
+          userName.textContent = username;
+          userNameInput.value = username;
+
+          logInPage.style.display = "none";
+          mainContainer.style.display = "flex";
+
+          loadData();
+        });
+
+      logInBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        logInPage.style.display = "flex";
+        regPage.style.display = "none";
+      });
+
+      logoutBtn.addEventListener("click", () => {
+        if (!confirm("Are you sure you want to logout?")) return;
+
+        localStorage.removeItem("loggedInUser");
+
+        // Reset UI
+        transactions = [];
+        userName.textContent = "User";
+        userNameInput.value = "";
+        currencySymbol = "₹";
+
+        mainContainer.style.display = "none";
+        logInPage.style.display = "flex";
+
+        // Clear login inputs
+        document.querySelector(
+          ".logInInput .userInput:nth-child(1) input",
+        ).value = "";
+        document.querySelector(
+          ".logInInput .userInput:nth-child(2) input",
+        ).value = "";
+      });
+
+      addTransactionBtn.addEventListener("click", (e) => {
+        formTransaction.style.display = "flex";
+      });
+
+      close.addEventListener("click", (e) => {
+        formTransaction.style.display = "none";
+      });
+
+      dashboard.addEventListener("click", (e) => {
+        dashboardPage.style.display = "flex";
+        dashboard.style.backgroundColor = "rgb(219, 234, 254)";
+        dashboard.style.color = "rgb(30, 64, 175)";
+        settingsPage.style.display = "none";
+        setting.style.backgroundColor = "";
+        setting.style.color = "";
+      });
+
+      setting.addEventListener("click", (e) => {
+        settingsPage.style.display = "flex";
+        setting.style.backgroundColor = "rgb(219, 234, 254)";
+        setting.style.color = "rgb(30, 64, 175)";
+        dashboardPage.style.display = "none";
+        dashboard.style.backgroundColor = "";
+        dashboard.style.color = "";
+      });
+
+      // Update dashboeard current balance,total incom,total exoence,total transaction
+
+      let transactions = [];
+      let currencySymbol = "₹";
+
+      function updateDashboard() {
+        let income = 0;
+        let expense = 0;
+
+        transactions.forEach((transaction) => {
+          if (transaction.type === "Income") {
+            income += Number(transaction.Amount);
+          } else {
+            expense += Number(transaction.Amount);
+          }
+        });
+
+        const balance = income - expense;
+
+        document.getElementById("currentBalance").textContent =
+          currencySymbol + balance.toFixed(2);
+
+        document.getElementById("totalIncome").textContent =
+          currencySymbol + income.toFixed(2);
+
+        document.getElementById("totalExpense").textContent =
+          currencySymbol + expense.toFixed(2);
+
+        document.getElementById("totalTransactions").textContent =
+          transactions.length;
+      }
+
+      // form
+
+      function renderTransactions() {
+        const tbody = document.getElementById("transactionBody");
+
+        tbody.innerHTML = "";
+
+        transactions.forEach((item, index) => {
+          tbody.innerHTML += `
+        <tr>
+
+            <td>${item.date}</td>
+
+            <td>${item.description}</td>
+
+            <td>${item.category}</td>
+
+            <td style="color:${item.type === "Income" ? "green" : "red"}">
+
+                ${item.type === "Income" ? "+" : "-"}₹${item.Amount}
+
+            </td>
+
+            <td>
+
+                <button class="editBtn"
+                onclick="editTransaction(${index})">
+
+                Edit
+
+                </button>
+
+                <button class="deleteBtn"
+                onclick="deleteTransaction(${index})">
+
+                Delete
+
+                </button>
+
+            </td>
+
+        </tr>
+        `;
+        });
+      }
+
+      // form
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        let type = event.target[0].value;
+        let description = event.target[1].value;
+        let Amount = event.target[2].value;
+        let date = event.target[3].value;
+        let category = event.target[4].value;
+
+        if (description.trim() === "") {
+          alert("please fill all the fields");
+          return;
+        }
+
+        let obj = {
+          type,
+          description,
+          Amount: Number(Amount),
+          date,
+          category,
+        };
+
+        transactions.push(obj);
+
+        saveData();
+
+        renderTransactions();
+        updateChart();
+        updateDashboard();
+
+        form.reset();
+
+        formTransaction.style.display = "none";
+      });
+
+      // EDITE DATA USING  SETTING FOR USER NAM AND CURRENCY
+
+      saveSettings.addEventListener("click", () => {
+        userName.textContent = userNameInput.value || "User";
+
+        currencySymbol = currency.value;
+
+        saveData();
+
+        updateDashboard();
+
+        localStorage.setItem("username", userName.textContent);
+        localStorage.setItem("currency", currencySymbol);
+      });
+
+      // creat chart
+
+      const ctx = document.getElementById("cashFlowChart");
+
+      const chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Income vs Expense"],
+          datasets: [
+            {
+              label: "Income",
+              data: [0],
+              backgroundColor: "green",
+            },
+            {
+              label: "Expense",
+              data: [0],
+              backgroundColor: "red",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      //creat  chart updte and delete
+      function updateChart() {
+        let income = 0;
+        let expense = 0;
+
+        transactions.forEach((transaction) => {
+          if (transaction.type === "Income") {
+            income += transaction.Amount;
+          } else {
+            expense += transaction.Amount;
+          }
+        });
+
+        chart.data.datasets[0].data = [income];
+        chart.data.datasets[1].data = [expense];
+
+        chart.update();
+      }
+
+      // delete transaction
+      function deleteTransaction(index) {
+        transactions.splice(index, 1);
+
+        saveData();
+
+        renderTransactions();
+        updateChart();
+        updateDashboard();
+      }
+
+      // update transaction
+
+      function editTransaction(index) {
+        let item = transactions[index];
+
+        formTransaction.style.display = "flex";
+
+        form[0].value = item.type;
+        form[1].value = item.description;
+        form[2].value = item.Amount;
+        form[3].value = item.date;
+        form[4].value = item.category;
+
+        transactions.splice(index, 1);
+
+        saveData();
+
+        renderTransactions();
+        updateChart();
+        updateDashboard();
+      }
+
+      const savedName = localStorage.getItem("username");
+      const savedCurrency = localStorage.getItem("currency");
+
+      if (savedName) {
+        userName.textContent = savedName;
+        userNameInput.value = savedName;
+      }
+
+      if (savedCurrency) {
+        currencySymbol = savedCurrency;
+        currency.value = savedCurrency;
+      }
+
+      // clear all data
+
+      resetBtn.addEventListener("click", () => {
+        if (!confirm("Delete all data?")) return;
+
+        localStorage.removeItem("transactions");
+        localStorage.removeItem("username");
+        localStorage.removeItem("currency");
+
+        transactions = [];
+
+        userName.textContent = "User";
+        userNameInput.value = "";
+
+        currencySymbol = "₹";
+        currency.value = "₹";
+
+        renderTransactions();
+        updateDashboard();
+        updateChart();
+      });
+
+      document
+        .querySelector(".darkMode .cover")
+        .addEventListener("click", () => {
+          const isDark = document.body.classList.toggle("dark");
+          const circle = document.querySelector(".darkMode .circle");
+          circle.style.transform = isDark ? "translateX(25px)" : "";
+          circle.style.backgroundColor = isDark ? "black" : "";
+          localStorage.setItem("darkMode", isDark);
+        });
+
+      // Load saved preference
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark");
+        document.querySelector(".darkMode .circle").style.transform =
+          "translateX(25px)";
+      }
+
+      const alreadyLoggedIn = localStorage.getItem("loggedInUser");
+
+      if (alreadyLoggedIn) {
+        userName.textContent = alreadyLoggedIn;
+        userNameInput.value = alreadyLoggedIn;
+        logInPage.style.display = "none";
+        mainContainer.style.display = "flex";
+        loadData();
+      } else {
+        mainContainer.style.display = "none";
+        logInPage.style.display = "flex";
+      }
+    </script>
+  </body>
+</html>
